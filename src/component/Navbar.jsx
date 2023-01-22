@@ -13,7 +13,7 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
-
+import { Link } from "react-router-dom";
 const pages = ["Classes"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 function ResponsiveAppBar() {
@@ -88,8 +88,10 @@ function ResponsiveAppBar() {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                <MenuItem key={page}>
+                  <Typography href="/classes" textAlign="center">
+                    {page}
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -115,7 +117,12 @@ function ResponsiveAppBar() {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
-              <Button key={page} onClick={handleCloseNavMenu} sx={{ my: 2, color: "white", display: "block" }}>
+              <Button
+                href={"/classes"}
+                key={page}
+                // onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: "white", display: "block" }}
+              >
                 {page}
               </Button>
             ))}

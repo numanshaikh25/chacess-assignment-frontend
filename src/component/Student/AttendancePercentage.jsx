@@ -9,6 +9,7 @@ import DialogActions from "@mui/material/DialogActions";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import Typography from "@mui/material/Typography";
+import axios from "axios";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -48,9 +49,9 @@ BootstrapDialogTitle.propTypes = {
   onClose: PropTypes.func.isRequired,
 };
 
-export default function CustomizedDialogs() {
+export default function CustomizedDialogs({ id }) {
   const [open, setOpen] = React.useState(false);
-
+  const [studentAttendance, setStudentAttendance] = React.useState({});
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -58,28 +59,26 @@ export default function CustomizedDialogs() {
     setOpen(false);
   };
 
+  const getAttendancePercentage = () => {
+    axios.get(`http://127.0.0.1:8000/attendance-management/student-attendance/${id}`).then((res) => {
+      setStudentAttendance(res.data);
+      console.log(res.data);
+    });
+  };
+
+  React.useEffect(() => {
+    getAttendancePercentage();
+  }, []);
+
   return (
     <div>
-      <Button variant="contained" onClick={handleClickOpen}>
+      <Button variant="contained" onClick={handleClickOpen} sx={{ textTransform: "capitalize", fontWeight: "600" }}>
         View
       </Button>
       <BootstrapDialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
-        <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
-          Attendance Percentage
-        </BootstrapDialogTitle>
+        <BootstrapDialogTitle id="customized-dialog-title">Attendance Percentage</BootstrapDialogTitle>
         <DialogContent dividers>
-          <Typography gutterBottom>
-            Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget
-            quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-          </Typography>
-          <Typography gutterBottom>
-            Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet
-            rutrum faucibus dolor auctor.
-          </Typography>
-          <Typography gutterBottom>
-            Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl
-            consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.
-          </Typography>
+          <h1 style={{ textAlign: "center" }}>{String(studentAttendance.attendance_percentage).slice(0, 5)}%</h1>
         </DialogContent>
         <DialogActions>
           <Button autoFocus onClick={handleClose}>
