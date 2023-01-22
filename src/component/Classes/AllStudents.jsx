@@ -3,10 +3,8 @@ import PrimaryTable from "../../common/PrimaryTable";
 import withRouter from "../withRouter";
 import axios from "axios";
 import { Button } from "@mui/material";
-import AttendancePercentage from "../Student/AttendancePercentage";
-import MarkAttendance from "../Student/MarkAttendance";
-import AddStudent from "../Student/AddStudent";
 import Alert from "@mui/material/Alert";
+import Dialogue from "../../common/Dialogue";
 class AllStudents extends Component {
   constructor(props) {
     super(props);
@@ -20,22 +18,16 @@ class AllStudents extends Component {
       data.forEach(
         (c) => (
           (c["mark_attendance"] = (
-            // <Button variant="contained" sx={{ textTransform: "capitalize", fontWeight: "600" }} onClick={() => {}}>
-            //   Mark
-            // </Button>
-            <MarkAttendance
+            <Dialogue
               id={c.id}
               class_name={c.class_name}
               setSuccess={this.props.setSuccess}
               setError={this.props.setError}
+              buttonText={"Mark"}
+              dialogueTitle={"Mark Attendance"}
             />
           )),
-          (c["view_percentage"] = (
-            // <Button variant="contained" sx={{ textTransform: "capitalize", fontWeight: "600" }} onClick={() => {}}>
-            //   View
-            // </Button>
-            <AttendancePercentage id={c.id} />
-          ))
+          (c["view_percentage"] = <Dialogue id={c.id} buttonText={"View"} dialogueTitle={"Attendance Percentage"} />)
         )
       );
       this.setState({ students: data });
@@ -70,7 +62,9 @@ class AllStudents extends Component {
           )}
         </div>
         <div style={{ textAlign: "right" }}>
-          <AddStudent
+          <Dialogue
+            buttonText={"Add A Student"}
+            dialogueTitle={"Student Details"}
             class_name={this.props.params.id}
             setSuccess={this.props.setSuccess}
             setError={this.props.setError}
