@@ -89,9 +89,9 @@ function ResponsiveAppBar() {
             >
               {pages.map((page) => (
                 <MenuItem key={page}>
-                  <Typography href="/classes" textAlign="center">
+                  <Button href="/classes" textAlign="center">
                     {page}
-                  </Typography>
+                  </Button>
                 </MenuItem>
               ))}
             </Menu>

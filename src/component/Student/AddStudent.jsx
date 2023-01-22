@@ -65,7 +65,7 @@ export default function CustomizedDialogs({ class_name, setSuccess, setError }) 
   const [age, setAge] = React.useState("");
   const [address, setAddress] = React.useState("");
 
-  const handleChange = (event) => {
+  const handleGenderChange = (event) => {
     console.log(event.target.value);
     setGender(event.target.value);
   };
@@ -150,7 +150,7 @@ export default function CustomizedDialogs({ class_name, setSuccess, setError }) 
                   label="Gender"
                   required
                   value={gender}
-                  onChange={handleChange}
+                  onChange={handleGenderChange}
                 >
                   <MenuItem value={"Male"}>Male</MenuItem>
                   <MenuItem value={"Female"}>Female</MenuItem>
