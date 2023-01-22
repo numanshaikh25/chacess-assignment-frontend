@@ -3,7 +3,6 @@ import "./App.css";
 import Navbar from "./component/Navbar";
 import Home from "./component/Home";
 import Classes from "./component/Classes";
-import Container from "./component/Container";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import AllStudents from "./component/Classes/AllStudents";
 
@@ -18,7 +17,6 @@ function App() {
           <Route path="/classes/:id" element={<AllStudents />} />
         </Routes>
       </BrowserRouter>
-      {/* <Container /> */}
     </div>
   );
 }
