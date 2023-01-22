@@ -89,7 +89,7 @@ function ResponsiveAppBar() {
             >
               {pages.map((page) => (
                 <MenuItem key={page}>
-                  <Button href="/classes" textAlign="center">
+                  <Button href="/classes" sx={{ textTransform: "capitalize", fontWeight: "600" }} textAlign="center">
                     {page}
                   </Button>
                 </MenuItem>
@@ -121,7 +121,7 @@ function ResponsiveAppBar() {
                 href={"/classes"}
                 key={page}
                 // onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
+                sx={{ my: 2, color: "white", display: "block", textTransform: "capitalize", fontWeight: "600" }}
               >
                 {page}
               </Button>
